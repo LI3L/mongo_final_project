@@ -1,30 +1,30 @@
-const { getAllProducts, getProduct, createProduct } = require('../services/products')
+const { getAllWrods, getWrods, createWrods } = require('../services/wrods')
 
 module.exports = {
-    listProducts: async (req, res) => {
+    listWrods: async (req, res) => {
         try {
-            const products = await getAllProducts()
-            res.json(products)
+            const wrods = await getAllWrods()
+            res.json(wrods)
         }
         catch (err) {
             res.status(500).send(err)
         }
     },
-    getProduct: async (req, res) => {
+    getWrods: async (req, res) => {
         try {
             const id = req.params.id
-            const product = await getProduct(id)
-            res.json(product)
+            const wrods = await getWrods(id)
+            res.json(wrods)
         }
         catch (err) {
             res.status(500).send(err)
         }
     },
-    createProduct: async (req, res) => {
+    createWrods: async (req, res) => {
         try {
             const { name } = req.body
-            const newProduct = await createProduct(name)
-            res.json(newProduct)
+            const newWrods = await createWrods(name)
+            res.json(newWrods)
         }
         catch (err) {
             res.status(500).send(err)
