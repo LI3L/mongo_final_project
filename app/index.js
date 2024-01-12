@@ -1,17 +1,18 @@
 const bodyParser = require("body-parser");
 const express = require('express');
-const productsRouter = require("./routes/products");
+const wrodsRouter = require("./routes/wrods");
 const usersRouter = require("./routes/users");
-const postsRouter = require("./routes/posts");
+const sentencesRouter = require("./routes/sentences");
 
 
 const app = express();
 app.use(bodyParser.json());
-app.use('/api/products', productsRouter);
+
+app.use('/api/wrods', wrodsRouter);
 
 app.use('/api/users',usersRouter);
 
-app.use('/api/posts',postsRouter);
+app.use('/api/sentences',sentencesRouter);
 
 module.exports = app;
 
