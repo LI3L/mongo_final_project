@@ -22,8 +22,8 @@ module.exports = {
     },
     createWrods: async (req, res) => {
         try {
-            const { name } = req.body
-            const newWrods = await createWrods(name)
+            const { name,difficulty } = req.body
+            const newWrods = await createWrods(name, difficulty)
             res.json(newWrods)
         }
         catch (err) {

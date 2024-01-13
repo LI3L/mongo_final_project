@@ -1,21 +1,21 @@
 const { ObjectId } = require("mongodb");
 const MongoDatabase = require("./db");
 
-class ProductsCollection {
+class WordsCollection {
     constructor() {
-        this.productsCollection = MongoDatabase.instance().db().collection("products");
+        this.wordsCollection = MongoDatabase.instance().db().collection("words");
     }
 
     static instance() {
         if (!this._instance) {
-            this._instance = new ProductsCollection();
+            this._instance = new WordsCollection();
         }
         return this._instance;
     }
 
     static async findAll() {
         try {
-            return await this.instance().productsCollection.find({}).toArray();
+            return await this.instance().wordsCollection.find({}).toArray();
         } catch (error) {
             console.error("Error in findAll:", error);
             throw error;
@@ -24,16 +24,16 @@ class ProductsCollection {
 
     static async findById(idStr) {
         try {
-            return await this.instance().productsCollection.findOne({ _id: new ObjectId(idStr) });
+            return await this.instance().wordsCollection.findOne({ _id: new ObjectId(idStr) });
         } catch (error) {
             console.error("Error in findById:", error);
             throw error;
         }
     }
 
-    static async create(product) {
+    static async create(word) {
         try {
-            return await this.instance().productsCollection.insertOne(product);
+            return await this.instance().wordsCollection.insertOne(word);
         } catch (error) {
             console.error("Error in create:", error);
             throw error;
@@ -41,4 +41,4 @@ class ProductsCollection {
     }
 }
 
-module.exports = ProductsCollection;
+module.exports = WordsCollection;

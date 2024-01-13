@@ -1,21 +1,21 @@
 const { ObjectId } = require("mongodb");
 const MongoDatabase = require("./db");
 
-class PostsCollection {
+class SentencesCollection {
   constructor() {
-    this.postsCollection = MongoDatabase.instance().db().collection("posts");
+    this.sentencesCollection = MongoDatabase.instance().db().collection("sentences");
   }
 
   static instance() {
     if (!this._instance) {
-      this._instance = new PostsCollection();
+      this._instance = new SentencesCollection();
     }
     return this._instance;
   }
 
   static async findAll() {
     try {
-      return await this.instance().postsCollection.find({}).toArray();
+      return await this.instance().sentencesCollection.find({}).toArray();
     } catch (error) {
       console.error("Error in findAll:", error);
       throw error;
@@ -24,7 +24,7 @@ class PostsCollection {
 
   static async findById(idStr) {
     try {
-      return await this.instance().postsCollection.findOne({
+      return await this.instance().sentencesCollection.findOne({
         _id: new ObjectId(idStr),
       });
     } catch (error) {
@@ -33,9 +33,9 @@ class PostsCollection {
     }
   }
 
-  static async create(post) {
+  static async create(Sentence) {
     try {
-      return await this.instance().postsCollection.insertOne(post);
+      return await this.instance().sentencesCollection.insertOne(Sentence);
     } catch (error) {
       console.error("Error in create:", error);
       throw error;
@@ -43,4 +43,4 @@ class PostsCollection {
   }
 }
 
-module.exports = PostsCollection;
+module.exports = SentencesCollection;

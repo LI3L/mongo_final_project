@@ -1,8 +1,8 @@
-const controller = require("../controllers/posts");
+const controller = require("../controllers/sentences");
 const router = require("express").Router();
 
-router.get("/", controller.listPosts);
-router.get("/:id", controller.getPost);
-router.post("/", controller.createPost);
+router.get("/", controller.listSentences);
+router.get("/:id", controller.getSentence);
+router.post("/", controller.createSentence);
 
 module.exports = router;

@@ -1,34 +1,28 @@
-const PostsCollection = require("../DAL/posts.js");
+const SentencesCollection = require("../DAL/sentences.js");
 
 module.exports = {
-  getAllPosts: async () => {
-    const allPosts = await PostsCollection.findAll();
-    return allPosts.map((p) => ({
-      id: p._id,
-      userId: p.userId,
-      title: p.title,
-      text: p.text,
-      img: p.img,
+  getAllSentences: async () => {
+    const allSentences = await SentencesCollection.findAll();
+    return allSentences.map((s) => ({
+      id: s._id,
+      difficulty: s.difficulty,
+      sentence: s.sentence
     }));
   },
-  getPost: async (strId) => {
-    const post = await PostsCollection.findById(strId);
-    const { userId, title, text, img } = post;
+  getSentence: async (strId) => {
+    const Sentence = await SentencesCollection.findById(strId);
+    const { difficulty , sentence} = Sentence;
     return {
-      userId,
-      title,
-      text,
-      img,
+      difficulty,
+      sentence
     };
   },
-  createPost: async (userId, title, text, img) => {
-    const p = await PostsCollection.create({
-      userId,
-      title,
-      text,
-      img,
+  createSentence: async (difficulty, sentence) => {
+    const s = await SentencesCollection.create({
+      difficulty,
+      sentence,
       createdAt: Date.now(),
     });
-    return p;
+    return s;
   },
 };
