@@ -41,4 +41,16 @@ module.exports = {
     const u = await UsersCollection.addWord(userId, word, difficulty);
     return u;
   },
+  findByName: async (name) => {
+    const user = await UsersCollection.findByName(name);
+    const { name, mail, age, password, points, words } = user;
+    return {
+      name,
+      mail,
+      age,
+      password,
+      points,
+      words,
+    };
+  },
 };

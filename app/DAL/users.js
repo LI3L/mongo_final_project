@@ -43,7 +43,7 @@ class UsersCollection {
           hard: [],
         },
       };
-      return await this.instance().usersCollection.insertOne(user);
+      return await this.instance().usersCollection.insertOne(newUser);
     } catch (error) {
       console.error("Error in create:", error);
       throw error;
@@ -67,6 +67,17 @@ class UsersCollection {
       );
     } catch (error) {
       console.error("Error in addWord:", error);
+      throw error;
+    }
+  }
+
+  static async findByName(name) {
+    try {
+      return await this.instance().usersCollection.findOne({
+        name: name,
+      });
+    } catch (error) {
+      console.error("Error in findByName:", error);
       throw error;
     }
   }

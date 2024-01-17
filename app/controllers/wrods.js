@@ -26,7 +26,7 @@ module.exports = {
   getWrodsByDifficulty: async (req, res) => {
     try {
       const difficulty = req.params.difficulty;
-      const wrods = await getWrodsByDifficulty(difficulty);
+      const wrods = await getWordsByDifficulty(difficulty);
       res.json(wrods);
     } catch (err) {
       res.status(500).send(err);

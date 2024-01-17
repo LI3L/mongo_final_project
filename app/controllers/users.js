@@ -3,6 +3,7 @@ const {
   getUser,
   createUser,
   addWord,
+  findByName,
 } = require("../services/users");
 
 module.exports = {
@@ -44,6 +45,15 @@ module.exports = {
       const userId = req.params.id;
       const { word, difficulty } = req.body;
       const user = await addWord(userId, word, difficulty);
+      res.json(user);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  findByName: async (req, res) => {
+    try {
+      const name = req.params.name;
+      const user = await findByName(name);
       res.json(user);
     } catch (err) {
       res.status(500).send(err);
