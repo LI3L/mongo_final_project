@@ -8,29 +8,37 @@ module.exports = {
       name: u.name,
       mail: u.mail,
       age: u.age,
-      city: u.city,
-      coordinates: u.coordinates,
+      password: u.password,
+      points: u.points,
+      words: u.words,
     }));
   },
   getUser: async (strId) => {
     const user = await UsersCollection.findById(strId);
-    const { name, mail, age, city, coordinates } = user;
+    const { name, mail, age, password, points, words } = user;
     return {
       name,
       mail,
       age,
-      city,
-      coordinates,
+      password,
+      points,
+      words,
     };
   },
-  createUser: async (name, mail, age, city) => {
+  createUser: async (name, mail, age, password, points) => {
     const u = await UsersCollection.create({
       name,
       mail,
       age,
-      city,
+      password,
+      points,
+      words,
       createdAt: Date.now(),
     });
+    return u;
+  },
+  addWord: async (userId, word, difficulty) => {
+    const u = await UsersCollection.addWord(userId, word, difficulty);
     return u;
   },
 };

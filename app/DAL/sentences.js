@@ -3,7 +3,9 @@ const MongoDatabase = require("./db");
 
 class SentencesCollection {
   constructor() {
-    this.sentencesCollection = MongoDatabase.instance().db().collection("sentences");
+    this.sentencesCollection = MongoDatabase.instance()
+      .db()
+      .collection("sentences");
   }
 
   static instance() {
@@ -29,6 +31,17 @@ class SentencesCollection {
       });
     } catch (error) {
       console.error("Error in findById:", error);
+      throw error;
+    }
+  }
+
+  static async findByDifficulty(difficulty) {
+    try {
+      return await this.instance().sentencesCollection.findOne({
+        difficulty: difficulty,
+      });
+    } catch (error) {
+      console.error("Error in findByDifficulty:", error);
       throw error;
     }
   }

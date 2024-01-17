@@ -1,4 +1,9 @@
-const { getAllSentences, getSentence, createSentence } = require("../services/sentences");
+const {
+  getAllSentences,
+  getSentence,
+  createSentence,
+  getSentenceByDifficulty,
+} = require("../services/sentences");
 
 module.exports = {
   listSentences: async (req, res) => {
@@ -11,8 +16,17 @@ module.exports = {
   },
   getSentence: async (req, res) => {
     try {
-      const sentenceId = req.params.userId;
-      const sentence = await getSentence(sentenceId);
+      const id = req.params.id;
+      const sentence = await getSentence(id);
+      res.json(sentence);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  getSentenceByDifficulty: async (req, res) => {
+    try {
+      const difficulty = req.params.difficulty;
+      const sentence = await getSentenceByDifficulty(difficulty);
       res.json(sentence);
     } catch (err) {
       res.status(500).send(err);
@@ -20,8 +34,8 @@ module.exports = {
   },
   createSentence: async (req, res) => {
     try {
-      const { difficulty,sentence } = req.body;
-      const newSentence = await createSentence(difficulty,sentence);
+      const { difficulty, sentence, points } = req.body;
+      const newSentence = await createSentence(difficulty, sentence, points);
       res.json(newSentence);
     } catch (err) {
       res.status(500).send(err);
