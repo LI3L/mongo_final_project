@@ -3,9 +3,7 @@ const MongoDatabase = require("./db");
 
 class UsersCollection {
   constructor() {
-    this.usersCollection = MongoDatabase.instance()
-      .db()
-      .collection("users");
+    this.usersCollection = MongoDatabase.instance().db().collection("users");
   }
 
   static instance() {
@@ -37,16 +35,49 @@ class UsersCollection {
 
   static async create(user) {
     try {
-        const newUser = {
-          ...user,
-          city: {
-            name: user.city.name,
-            location: { type: "Point", coordinates: user.city.location },
-          },
-        };
+      const newUser = {
+        ...user,
+        words: {
+          easy: [],
+          medium: [],
+          hard: [],
+        },
+      };
       return await this.instance().usersCollection.insertOne(newUser);
     } catch (error) {
       console.error("Error in create:", error);
+      throw error;
+    }
+  }
+
+  static async addWord(userId, word, difficulty) {
+    try {
+      const user = await this.instance().usersCollection.findOne({
+        _id: new ObjectId(userId),
+      });
+      const words = user.words;
+      words[difficulty].push(word);
+      return await this.instance().usersCollection.updateOne(
+        { _id: new ObjectId(userId) },
+        {
+          $set: {
+            words: words,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error in addWord:", error);
+      throw error;
+    }
+  }
+
+  static async findByName(name) {
+    try {
+      return await this.instance().usersCollection.findOne({
+        name: name,
+      });
+    } catch (error) {
+      console.error("Error in findByName:", error);
       throw error;
     }
   }

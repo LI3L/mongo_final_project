@@ -2,6 +2,8 @@ const {
   getAllUsers,
   getUser,
   createUser,
+  addWord,
+  findByName,
 } = require("../services/users");
 
 module.exports = {
@@ -24,9 +26,35 @@ module.exports = {
   },
   createUser: async (req, res) => {
     try {
-      const { name,mail,age,city } = req.body;
-      const newUser = await createUser(name,mail,age,city);
+      const { name, mail, age, password, points, words } = req.body;
+      const newUser = await createUser(
+        name,
+        mail,
+        age,
+        password,
+        points,
+        words
+      );
       res.json(newUser);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  addWord: async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const { word, difficulty } = req.body;
+      const user = await addWord(userId, word, difficulty);
+      res.json(user);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  findByName: async (req, res) => {
+    try {
+      const name = req.params.name;
+      const user = await findByName(name);
+      res.json(user);
     } catch (err) {
       res.status(500).send(err);
     }

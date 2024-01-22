@@ -1,21 +1,23 @@
 const { ObjectId } = require("mongodb");
 const MongoDatabase = require("./db");
 
-class WordsCollection {
+class SentencesCollection {
   constructor() {
-    this.wordsCollection = MongoDatabase.instance().db().collection("words");
+    this.sentencesCollection = MongoDatabase.instance()
+      .db()
+      .collection("sentences");
   }
 
   static instance() {
     if (!this._instance) {
-      this._instance = new WordsCollection();
+      this._instance = new SentencesCollection();
     }
     return this._instance;
   }
 
   static async findAll() {
     try {
-      return await this.instance().wordsCollection.find({}).toArray();
+      return await this.instance().sentencesCollection.find({}).toArray();
     } catch (error) {
       console.error("Error in findAll:", error);
       throw error;
@@ -24,7 +26,7 @@ class WordsCollection {
 
   static async findById(idStr) {
     try {
-      return await this.instance().wordsCollection.findOne({
+      return await this.instance().sentencesCollection.findOne({
         _id: new ObjectId(idStr),
       });
     } catch (error) {
@@ -35,7 +37,7 @@ class WordsCollection {
 
   static async findByDifficulty(difficulty) {
     try {
-      return await this.instance().wordsCollection.findOne({
+      return await this.instance().sentencesCollection.findOne({
         difficulty: difficulty,
       });
     } catch (error) {
@@ -44,9 +46,9 @@ class WordsCollection {
     }
   }
 
-  static async create(word) {
+  static async create(Sentence) {
     try {
-      return await this.instance().wordsCollection.insertOne(word);
+      return await this.instance().sentencesCollection.insertOne(Sentence);
     } catch (error) {
       console.error("Error in create:", error);
       throw error;
@@ -54,4 +56,4 @@ class WordsCollection {
   }
 }
 
-module.exports = WordsCollection;
+module.exports = SentencesCollection;
