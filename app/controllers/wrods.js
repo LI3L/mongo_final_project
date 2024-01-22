@@ -2,7 +2,7 @@ const {
   getAllWrods,
   getWrods,
   getWordsByDifficulty,
-  createWrods,
+  createWords,
 } = require("../services/wrods");
 
 module.exports = {
@@ -35,7 +35,7 @@ module.exports = {
   createWrods: async (req, res) => {
     try {
       const { name, difficulty, points } = req.body;
-      const newWrods = await createWrods(name, difficulty, points);
+      const newWrods = await createWords(name, difficulty, points);
       res.json(newWrods);
     } catch (err) {
       res.status(500).send(err);

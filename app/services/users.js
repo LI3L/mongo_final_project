@@ -27,12 +27,8 @@ module.exports = {
   },
   createUser: async (p) => {
     const u = await UsersCollection.create({
-      name: p.name,
-      mail: p.mail,
-      age: p.age,
-      password: p.password,
+      ...p,
       points: 0,
-      words: [],
       createdAt: Date.now(),
     });
     return u;
