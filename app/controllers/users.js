@@ -26,15 +26,8 @@ module.exports = {
   },
   createUser: async (req, res) => {
     try {
-      const { name, mail, age, password, points, words } = req.body;
-      const newUser = await createUser(
-        name,
-        mail,
-        age,
-        password,
-        points,
-        words
-      );
+      const p = req.body;
+      const newUser = await createUser(p);
       res.json(newUser);
     } catch (err) {
       res.status(500).send(err);
