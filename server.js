@@ -3,7 +3,7 @@ const MongoDatabase = require("./app/DAL/db");
 
 const run = async () => {
   try {
-    const port = process.env.PORT || "27017";
+    const port = process.env.PORT || "3001";
     await MongoDatabase.instance().connect();
     app.listen(port, () => console.log(`Listening on port: ${port}`));
   } catch (err) {

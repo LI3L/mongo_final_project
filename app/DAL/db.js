@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 
 class MongoDatabase {
     constructor() {
-        this.url = 'mongodb://localhost:27017/Duolingo';
+        this.url = 'mongodb://localhost:27017/duolingo';
         this.client = null;
     }
 
