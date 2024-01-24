@@ -53,6 +53,25 @@ class WordsCollection {
       throw error;
     }
   }
+
+  static async editWord(id, name, difficulty, translation, points) {
+    try {
+      return await this.instance().wordsCollection.updateOne(
+        { _id: new ObjectId(id) },
+        {
+          $set: {
+            name: name,
+            difficulty: difficulty,
+            translation: translation,
+            points: points,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error in editWord:", error);
+      throw error;
+    }
+  }
 }
 
 module.exports = WordsCollection;

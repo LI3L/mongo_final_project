@@ -7,6 +7,7 @@ module.exports = {
       id: w._id,
       name: w.name,
       difficulty: w.difficulty,
+      translation: w.translation,
       points: w.points,
     }));
   },
@@ -27,12 +28,24 @@ module.exports = {
       points,
     };
   },
-  createWords: async (name, difficulty) => {
+  createWords: async (name, difficulty, translation, points) => {
     const word = await WordsCollection.create({
       name,
       difficulty,
+      translation,
+      points,
       createdAt: Date.now(),
     });
+    return word;
+  },
+  editWord: async (id, name, difficulty, points) => {
+    const word = await WordsCollection.editWord(
+      id,
+      name,
+      difficulty,
+      translation,
+      points
+    );
     return word;
   },
 };

@@ -33,7 +33,6 @@ module.exports = {
       if (user.password === password) {
         res.json(user);
       } else {
-        // res.status(400).send("Wrong password");
         return res.json(null);
       }
     } catch (err) {
