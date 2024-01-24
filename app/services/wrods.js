@@ -27,11 +27,10 @@ module.exports = {
       points,
     };
   },
-  createWords: async (name, difficulty, points) => {
+  createWords: async (name, difficulty) => {
     const word = await WordsCollection.create({
       name,
       difficulty,
-      points,
       createdAt: Date.now(),
     });
     return word;

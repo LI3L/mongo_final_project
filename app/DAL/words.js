@@ -46,6 +46,7 @@ class WordsCollection {
 
   static async create(word) {
     try {
+      console.log("createWords", word.name, word.difficulty);
       return await this.instance().wordsCollection.insertOne(word);
     } catch (error) {
       console.error("Error in create:", error);
