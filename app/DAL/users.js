@@ -21,6 +21,17 @@ class UsersCollection {
       throw error;
     }
   }
+  static async findByMail(mail) {
+    try {
+      console.log(mail);
+      const u=await this.instance().usersCollection.findOne({ mail: mail });
+      console.log(u);
+      return u;
+    } catch (error) {
+      console.error("Error in findByMail:", error);
+      throw error;
+    }
+  }
 
   static async findById(idStr) {
     try {
