@@ -26,11 +26,26 @@ module.exports = {
       res.status(500).send(err);
     }
   },
+  existsUser: async (req, res) => {
+    try {
+      const { mail } = req.body;
+      const user = await findByMail(mail);
+      if (user) {
+        res.json(true);
+      } else {
+        // res.status(400).send("Wrong password");
+        return res.json(false);
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+  },
   getLoginUser: async (req, res) => {
     try {
       const { mail, password } = req.body;
       const user = await findByMail(mail);
-      if (user.password === password) {
+      if (user&&(user.password === password)) {
         res.json(user);
       } else {
         // res.status(400).send("Wrong password");
