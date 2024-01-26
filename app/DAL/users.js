@@ -24,7 +24,7 @@ class UsersCollection {
   static async findByMail(mail) {
     try {
       console.log(mail);
-      const u=await this.instance().usersCollection.findOne({ mail: mail });
+      const u = await this.instance().usersCollection.findOne({ mail: mail });
       console.log(u);
       return u;
     } catch (error) {
@@ -89,6 +89,26 @@ class UsersCollection {
       });
     } catch (error) {
       console.error("Error in findByName:", error);
+      throw error;
+    }
+  }
+
+  static async addPoints(userId, points) {
+    try {
+      const user = await this.instance().usersCollection.findOne({
+        _id: new ObjectId(userId),
+      });
+      const newPoints = user.points + points;
+      return await this.instance().usersCollection.updateOne(
+        { _id: new ObjectId(userId) },
+        {
+          $set: {
+            points: newPoints,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error in addPoints:", error);
       throw error;
     }
   }

@@ -52,4 +52,8 @@ module.exports = {
       words,
     };
   },
+  addPoints: async (userId, points) => {
+    const u = await UsersCollection.addPoints(userId, points);
+    return u;
+  },
 };
