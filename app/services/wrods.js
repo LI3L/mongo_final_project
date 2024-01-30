@@ -48,4 +48,19 @@ module.exports = {
     );
     return word;
   },
+  getWordsByDifficulty: async (difficulty) => {
+    try {
+      const words = await WordsCollection.findByDifficulty(difficulty);
+      return words.map((w) => ({
+        id: w._id,
+        name: w.name,
+        difficulty: w.difficulty,
+        translation: w.translation,
+        points: w.points,
+      }));
+    } catch (error) {
+      console.error("Error in findByDifficulty:", error);
+      throw error;
+    }
+  },
 };

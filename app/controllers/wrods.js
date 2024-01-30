@@ -4,6 +4,7 @@ const {
   getWordsByDifficulty,
   createWords,
   editWord,
+  getWordsByDifficulty,
 } = require("../services/wrods");
 
 module.exports = {
@@ -48,6 +49,15 @@ module.exports = {
       const { name, difficulty, translation, points } = req.body;
       const word = await editWord(id, name, difficulty, translation, points);
       res.json(word);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  getWordsByDifficulty: async (req, res) => {
+    try {
+      const difficulty = req.params.difficulty;
+      const words = await getWordsByDifficulty(difficulty);
+      res.json(words);
     } catch (err) {
       res.status(500).send(err);
     }
