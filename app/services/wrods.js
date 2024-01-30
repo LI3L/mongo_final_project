@@ -20,14 +20,6 @@ module.exports = {
       points,
     };
   },
-  getWordsByDifficulty: async (difficulty) => {
-    const word = await WordsCollection.findByDifficulty(difficulty);
-    const { name, points } = word;
-    return {
-      name,
-      points,
-    };
-  },
   createWords: async (name, difficulty, translation, points) => {
     const word = await WordsCollection.create({
       name,
