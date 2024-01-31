@@ -7,5 +7,6 @@ router.post("/", controller.createUser);
 router.post("/login", controller.getLoginUser);
 router.post("/exists", controller.existsUser);
 router.post("/addPoints", controller.addPoints);
+router.post("/addWord/:id", controller.addWord);
 
 module.exports = router;
