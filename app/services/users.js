@@ -15,8 +15,9 @@ module.exports = {
   },
   getUser: async (strId) => {
     const user = await UsersCollection.findById(strId);
-    const { name, mail, age, password, points, words } = user;
+    const { _id,name, mail, age, password, points, words } = user;
     return {
+      _id,
       name,
       mail,
       age,
