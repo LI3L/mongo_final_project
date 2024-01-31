@@ -35,9 +35,15 @@ module.exports = {
   },
   createWrods: async (req, res) => {
     try {
-      const { name, difficulty, translation, points } = req.body;
-      const newWrods = await createWords(name, difficulty, translation, points);
-      res.json(newWrods);
+      const wordsData=req.body;
+      const wordsArray= Array.isArray(wordsData)?wordsData:[wordsData];
+      const createW=[];
+      for(const word of wordsArray){
+        const { name, difficulty, translation, points } = word;
+        await createWords(name, difficulty, translation, points);
+
+      }
+      res.json(createWords);
     } catch (err) {
       res.status(500).send(err);
     }
