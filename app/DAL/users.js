@@ -53,6 +53,11 @@ class UsersCollection {
           medium: [],
           hard: [],
         },
+        sentences: {
+          easy: [],
+          medium: [],
+          hard: [],
+        },
       };
       return await this.instance().usersCollection.insertOne(newUser);
     } catch (error) {
@@ -78,6 +83,27 @@ class UsersCollection {
       );
     } catch (error) {
       console.error("Error in addWord:", error);
+      throw error;
+    }
+  }
+
+  static async addSentence(userId, sentence, difficulty) {
+    try {
+      const user = await this.instance().usersCollection.findOne({
+        _id: new ObjectId(userId),
+      });
+      const sentences = user.sentences;
+      sentences[difficulty].push(sentence);
+      return await this.instance().usersCollection.updateOne(
+        { _id: new ObjectId(userId) },
+        {
+          $set: {
+            sentences: sentences,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error in addSentence:", error);
       throw error;
     }
   }

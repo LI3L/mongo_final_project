@@ -7,6 +7,7 @@ const {
   findByName,
   findByMail,
   addPoints,
+  addSentence,
 } = require("../services/users");
 
 module.exports = {
@@ -88,6 +89,16 @@ module.exports = {
     try {
       const { userId, points } = req.body;
       const user = await addPoints(userId, points);
+      res.json(user);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  addSentence: async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const { sentence, difficulty } = req.body;
+      const user = await addSentence(userId, sentence, difficulty);
       res.json(user);
     } catch (err) {
       res.status(500).send(err);

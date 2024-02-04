@@ -11,11 +11,12 @@ module.exports = {
       password: u.password,
       points: u.points,
       words: u.words,
+      sentences: u.sentences,
     }));
   },
   getUser: async (strId) => {
     const user = await UsersCollection.findById(strId);
-    const { _id,name, mail, age, password, points, words } = user;
+    const { _id, name, mail, age, password, points, words, sentences } = user;
     return {
       _id,
       name,
@@ -24,6 +25,7 @@ module.exports = {
       password,
       points,
       words,
+      sentences,
     };
   },
   createUser: async (p) => {
@@ -38,12 +40,16 @@ module.exports = {
     const u = await UsersCollection.addWord(userId, word, difficulty);
     return u;
   },
+  addSentence: async (userId, sentence, difficulty) => {
+    const u = await UsersCollection.addSentence(userId, sentence, difficulty);
+    return u;
+  },
   findByMail: async (mail) => {
     return await UsersCollection.findByMail(mail);
   },
   findByName: async (name) => {
     const user = await UsersCollection.findByName(name);
-    const { mail, age, password, points, words } = user;
+    const { mail, age, password, points, words, sentences } = user;
     return {
       name,
       mail,
@@ -51,6 +57,7 @@ module.exports = {
       password,
       points,
       words,
+      sentences,
     };
   },
   addPoints: async (userId, points) => {
