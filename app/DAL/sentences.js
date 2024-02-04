@@ -54,6 +54,18 @@ class SentencesCollection {
       throw error;
     }
   }
+
+  static async getWords(idStr) {
+    try {
+      const sentence = await this.instance().sentencesCollection.findOne({
+        _id: new ObjectId(idStr),
+      });
+      return sentence.words;
+    } catch (error) {
+      console.error("Error in getWords:", error);
+      throw error;
+    }
+  }
 }
 
 module.exports = SentencesCollection;

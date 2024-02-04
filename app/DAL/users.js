@@ -25,7 +25,7 @@ class UsersCollection {
     try {
       console.log(mail);
       const u = await this.instance().usersCollection.findOne({ mail: mail });
-      if(u)return u;
+      if (u) return u;
       return null;
     } catch (error) {
       console.error("Error in findByMail:", error);

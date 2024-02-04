@@ -3,6 +3,7 @@ const {
   getSentence,
   createSentence,
   getSentenceByDifficulty,
+  getWords,
 } = require("../services/sentences");
 
 module.exports = {
@@ -34,9 +35,23 @@ module.exports = {
   },
   createSentence: async (req, res) => {
     try {
-      const { difficulty, sentence, points } = req.body;
-      const newSentence = await createSentence(difficulty, sentence, points);
+      const { difficulty, sentence, words, points } = req.body;
+      const newSentence = await createSentence(
+        difficulty,
+        sentence,
+        words,
+        points
+      );
       res.json(newSentence);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  getWords: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const words = await getWords(id);
+      res.json(words);
     } catch (err) {
       res.status(500).send(err);
     }
