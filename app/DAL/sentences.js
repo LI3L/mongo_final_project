@@ -37,9 +37,11 @@ class SentencesCollection {
 
   static async findByDifficulty(difficulty) {
     try {
-      return await this.instance().sentencesCollection.findOne({
-        difficulty: difficulty,
-      });
+      return await this.instance()
+        .sentencesCollection.findOne({
+          difficulty: difficulty,
+        })
+        .toArray();
     } catch (error) {
       console.error("Error in findByDifficulty:", error);
       throw error;

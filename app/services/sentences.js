@@ -23,12 +23,13 @@ module.exports = {
   },
   getSentenceByDifficulty: async (difficulty) => {
     const Sentence = await SentencesCollection.findByDifficulty(difficulty);
-    const { sentence, words, points } = Sentence;
-    return {
-      sentence,
-      words,
-      points,
-    };
+    return sentence.map((s) => ({
+      id: s._id,
+      difficulty: s.difficulty,
+      sentence: s.sentence,
+      words: s.words,
+      points: s.points,
+    }));
   },
   createSentence: async (difficulty, sentence, words, points) => {
     const s = await SentencesCollection.create({
