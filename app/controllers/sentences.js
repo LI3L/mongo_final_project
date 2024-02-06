@@ -4,6 +4,8 @@ const {
   createSentence,
   getSentenceByDifficulty,
   getWords,
+  addSuccess,
+  addFailure,
 } = require("../services/sentences");
 
 module.exports = {
@@ -52,6 +54,24 @@ module.exports = {
       const id = req.params.id;
       const words = await getWords(id);
       res.json(words);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  addSuccess: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const sentence = await addSuccess(id);
+      res.json(sentence);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  addFailure: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const sentence = await addFailure(id);
+      res.json(sentence);
     } catch (err) {
       res.status(500).send(err);
     }

@@ -4,6 +4,8 @@ const {
   getWordsByDifficulty,
   createWords,
   editWord,
+  addFailure,
+  addSuccess,
 } = require("../services/wrods");
 
 module.exports = {
@@ -35,13 +37,12 @@ module.exports = {
   },
   createWrods: async (req, res) => {
     try {
-      const wordsData=req.body;
-      const wordsArray= Array.isArray(wordsData)?wordsData:[wordsData];
-      const createW=[];
-      for(const word of wordsArray){
+      const wordsData = req.body;
+      const wordsArray = Array.isArray(wordsData) ? wordsData : [wordsData];
+      const createW = [];
+      for (const word of wordsArray) {
         const { name, difficulty, translation, points } = word;
         await createWords(name, difficulty, translation, points);
-
       }
       res.json(createWords);
     } catch (err) {
@@ -56,6 +57,24 @@ module.exports = {
       res.json(word);
     } catch (err) {
       res.status(500).send(err);
+    }
+  },
+  addSuccess: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const word = await addSuccess(id);
+      res.json(word);
+    } catch (err) {
+      res.status;
+    }
+  },
+  addFailure: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const word = await addFailure(id);
+      res.json(word);
+    } catch (err) {
+      res.status;
     }
   },
 };

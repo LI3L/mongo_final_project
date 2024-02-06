@@ -138,6 +138,46 @@ class UsersCollection {
       throw error;
     }
   }
+
+  static async addSuccess(userId) {
+    try {
+      const user = await this.instance().usersCollection.findOne({
+        _id: new ObjectId(userId),
+      });
+      const newSuccess = user.success + 1;
+      return await this.instance().usersCollection.updateOne(
+        { _id: new ObjectId(userId) },
+        {
+          $set: {
+            success: newSuccess,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error in addSuccess:", error);
+      throw error;
+    }
+  }
+
+  static async addFailure(userId) {
+    try {
+      const user = await this.instance().usersCollection.findOne({
+        _id: new ObjectId(userId),
+      });
+      const newFailure = user.failure + 1;
+      return await this.instance().usersCollection.updateOne(
+        { _id: new ObjectId(userId) },
+        {
+          $set: {
+            failure: newFailure,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error in addFailure:", error);
+      throw error;
+    }
+  }
 }
 
 module.exports = UsersCollection;

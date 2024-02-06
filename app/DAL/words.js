@@ -74,6 +74,30 @@ class WordsCollection {
       throw error;
     }
   }
+
+  static async addSuccess(id) {
+    try {
+      return await this.instance().wordsCollection.updateOne(
+        { _id: new ObjectId(id) },
+        { $inc: { success: 1 } }
+      );
+    } catch (error) {
+      console.error("Error in addSuccess:", error);
+      throw error;
+    }
+  }
+
+  static async addFailure(id) {
+    try {
+      return await this.instance().wordsCollection.updateOne(
+        { _id: new ObjectId(id) },
+        { $inc: { failure: 1 } }
+      );
+    } catch (error) {
+      console.error("Error in addFailure:", error);
+      throw error;
+    }
+  }
 }
 
 module.exports = WordsCollection;

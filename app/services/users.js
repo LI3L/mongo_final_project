@@ -32,6 +32,8 @@ module.exports = {
     const u = await UsersCollection.create({
       ...p,
       points: 0,
+      success: 0,
+      failure: 0,
       createdAt: Date.now(),
     });
     return u;
@@ -62,6 +64,16 @@ module.exports = {
   },
   addPoints: async (userId, points) => {
     const u = await UsersCollection.addPoints(userId, points);
+    return u;
+  },
+
+  addSuccess: async (id) => {
+    const u = await UsersCollection.addSuccess(id);
+    return u;
+  },
+
+  addFailure: async (id) => {
+    const u = await UsersCollection.addFailure(id);
     return u;
   },
 };

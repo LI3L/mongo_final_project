@@ -9,5 +9,7 @@ router.post("/exists", controller.existsUser);
 router.post("/addPoints", controller.addPoints);
 router.post("/addWord/:id", controller.addWord);
 router.post("/addSentence/:id", controller.addSentence);
+router.post("/addSuccess/:id", controller.addSuccess);
+router.post("/addFailure/:id", controller.addFailure);
 
 module.exports = router;

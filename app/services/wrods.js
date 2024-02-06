@@ -26,6 +26,8 @@ module.exports = {
       difficulty,
       translation,
       points,
+      success: 0,
+      failure: 0,
       createdAt: Date.now(),
     });
     return word;
@@ -54,5 +56,15 @@ module.exports = {
       console.error("Error in findByDifficulty:", error);
       throw error;
     }
+  },
+
+  addSuccess: async (id) => {
+    const w = await WordsCollection.addSuccess(id);
+    return w;
+  },
+
+  addFailure: async (id) => {
+    const w = await WordsCollection.addFailure(id);
+    return w;
   },
 };

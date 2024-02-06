@@ -8,6 +8,8 @@ const {
   findByMail,
   addPoints,
   addSentence,
+  addSuccess,
+  addFailure,
 } = require("../services/users");
 
 module.exports = {
@@ -102,6 +104,24 @@ module.exports = {
       res.json(user);
     } catch (err) {
       res.status(500).send(err);
+    }
+  },
+  addSuccess: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const user = await addSuccess(id);
+      res.json(user);
+    } catch (err) {
+      res.status;
+    }
+  },
+  addFailure: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const user = await addFailure(id);
+      res.json(user);
+    } catch (err) {
+      res.status;
     }
   },
 };

@@ -37,6 +37,8 @@ module.exports = {
       sentence,
       words,
       points,
+      success: 0,
+      failure: 0,
       createdAt: Date.now(),
     });
     return s;
@@ -44,5 +46,13 @@ module.exports = {
   getWords: async (strId) => {
     const words = await SentencesCollection.getWords(strId);
     return words;
+  },
+  addSuccess: async (id) => {
+    const s = await SentencesCollection.addSuccess(id);
+    return s;
+  },
+  addFailure: async (id) => {
+    const s = await SentencesCollection.addFailure(id);
+    return s;
   },
 };

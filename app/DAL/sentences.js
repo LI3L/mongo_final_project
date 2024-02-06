@@ -68,6 +68,40 @@ class SentencesCollection {
       throw error;
     }
   }
+
+  //increment success by 1
+  static async addSuccess(idStr) {
+    try {
+      return await this.instance().sentencesCollection.updateOne(
+        { _id: new ObjectId(idStr) },
+        {
+          $inc: {
+            success: 1,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error in addSuccess:", error);
+      throw error;
+    }
+  }
+
+  //increment failure by 1
+  static async addFailure(idStr) {
+    try {
+      return await this.instance().sentencesCollection.updateOne(
+        { _id: new ObjectId(idStr) },
+        {
+          $inc: {
+            failure: 1,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error in addFailure:", error);
+      throw error;
+    }
+  }
 }
 
 module.exports = SentencesCollection;
