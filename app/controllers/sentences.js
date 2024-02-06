@@ -37,13 +37,14 @@ module.exports = {
   },
   createSentence: async (req, res) => {
     try {
-      const { difficulty, sentence, words, points } = req.body;
-      const newSentence = await createSentence(
-        difficulty,
-        sentence,
-        words,
-        points
-      );
+      const sentenceData = req.body;
+      const sentenceArray = Array.isArray(sentenceData)? sentenceData: [sentenceData];
+      const newSentence = [];
+      for (const sent of sentenceArray) {
+        const { difficulty, sentence, words, points } = sent;
+        const sen=await createSentence(difficulty, sentence, words, points);
+        newSentence.push(sen);
+      }
       res.json(newSentence);
     } catch (err) {
       res.status(500).send(err);

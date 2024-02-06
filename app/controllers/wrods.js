@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const {
   getAllWrods,
   getWrods,
@@ -39,12 +40,13 @@ module.exports = {
     try {
       const wordsData = req.body;
       const wordsArray = Array.isArray(wordsData) ? wordsData : [wordsData];
-      const createW = [];
+      const newWords = [];
       for (const word of wordsArray) {
         const { name, difficulty, translation, points } = word;
-        await createWords(name, difficulty, translation, points);
+        const w = await createWords(name, difficulty, translation, points);
+        newWords.push(w);
       }
-      res.json(createWords);
+      res.json(newWords);
     } catch (err) {
       res.status(500).send(err);
     }
