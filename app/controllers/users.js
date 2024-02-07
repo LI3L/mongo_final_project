@@ -10,6 +10,7 @@ const {
   addSentence,
   addSuccess,
   addFailure,
+  getLeaderBord
 } = require("../services/users");
 
 module.exports = {
@@ -20,6 +21,13 @@ module.exports = {
     } catch (err) {
       res.status(500).send(err);
     }
+  },
+  getLeaderboard: async (req, res) => {
+    try {
+      const leaderboard = await getLeaderBord();
+      res.json(leaderboard);
+    } catch (err) {
+      res.status(500).send(err);}
   },
   getUser: async (req, res) => {
     try {

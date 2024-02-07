@@ -14,6 +14,10 @@ module.exports = {
       sentences: u.sentences,
     }));
   },
+  getLeaderBord: async () => {
+    return await UsersCollection.getLeaderBord();
+  },
+  
   getUser: async (strId) => {
     const user = await UsersCollection.findById(strId);
     const { _id, name, mail, age, password, points, words, sentences } = user;

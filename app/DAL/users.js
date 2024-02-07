@@ -12,6 +12,18 @@ class UsersCollection {
     }
     return this._instance;
   }
+  static async getLeaderBord() {
+    try {
+      return await this.instance()
+        .usersCollection.find({})
+        .sort({points:-1})
+        .limit(10)
+        .toArray();
+    } catch (error) {
+      console.error("Error in getLeaderBord:", error);
+      throw error;
+    }
+  }
 
   static async findAll() {
     try {
@@ -34,12 +46,13 @@ class UsersCollection {
   }
 
   static async findById(idStr) {
+    console.log("idStr:", idStr)
     try {
       return await this.instance().usersCollection.findOne({
         _id: new ObjectId(idStr),
       });
     } catch (error) {
-      console.error("Error in findById:", error);
+      console.error("Error in findById:"+error);
       throw error;
     }
   }
