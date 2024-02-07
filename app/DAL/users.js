@@ -12,7 +12,22 @@ class UsersCollection {
     }
     return this._instance;
   }
-  static async getLeaderBord() {
+  static async updateLevel(userId, level,data,type) {
+    try {
+      return await this.instance().usersCollection.updateOne(
+        { _id: new ObjectId(userId) },
+        {
+          $set: {
+            [`${type}.${level}`]: data,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error in updateLevel:", error);
+      throw error;
+  }
+}
+static async getLeaderBord() {
     try {
       return await this.instance()
         .usersCollection.find({})

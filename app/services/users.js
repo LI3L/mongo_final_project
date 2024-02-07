@@ -17,7 +17,11 @@ module.exports = {
   getLeaderBord: async () => {
     return await UsersCollection.getLeaderBord();
   },
-  
+  updateLevel: async (userId, level,data,type) => {
+    const u = await UsersCollection.updateLevel(userId, level,data,type);
+    return u;
+  },
+
   getUser: async (strId) => {
     const user = await UsersCollection.findById(strId);
     const { _id, name, mail, age, password, points, words, sentences } = user;
@@ -38,6 +42,7 @@ module.exports = {
       points: 0,
       success: 0,
       failure: 0,
+      admin: false,
       createdAt: Date.now(),
     });
     return u;

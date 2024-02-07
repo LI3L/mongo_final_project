@@ -10,7 +10,8 @@ const {
   addSentence,
   addSuccess,
   addFailure,
-  getLeaderBord
+  getLeaderBord,
+  updateLevel,
 } = require("../services/users");
 
 module.exports = {
@@ -18,6 +19,15 @@ module.exports = {
     try {
       const users = await getAllUsers();
       res.json(users);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  updateLevel: async (req, res) => {
+    try {
+      const { userId, level,data ,type} = req.body;
+      const user = await updateLevel(userId, level,data,type);
+      res.json(user);
     } catch (err) {
       res.status(500).send(err);
     }
