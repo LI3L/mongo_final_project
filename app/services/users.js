@@ -12,6 +12,9 @@ module.exports = {
       points: u.points,
       words: u.words,
       sentences: u.sentences,
+      admin: u.admin,
+      success: u.success,
+      failure: u.failure,
     }));
   },
   getLeaderBord: async () => {
@@ -24,7 +27,7 @@ module.exports = {
 
   getUser: async (strId) => {
     const user = await UsersCollection.findById(strId);
-    const { _id, name, mail, age, password, points, words, sentences } = user;
+    const { _id, name, mail, age, password, points, words, sentences,admin,success,failure } = user;
     return {
       _id,
       name,
@@ -34,6 +37,9 @@ module.exports = {
       points,
       words,
       sentences,
+      admin,
+      success,
+      failure
     };
   },
   createUser: async (p) => {
@@ -60,7 +66,7 @@ module.exports = {
   },
   findByName: async (name) => {
     const user = await UsersCollection.findByName(name);
-    const { mail, age, password, points, words, sentences } = user;
+    const { mail, age, password, points, words, sentences,admin,success,failure } = user;
     return {
       name,
       mail,
@@ -69,6 +75,9 @@ module.exports = {
       points,
       words,
       sentences,
+      admin,
+      success,
+      failure
     };
   },
   addPoints: async (userId, points) => {
