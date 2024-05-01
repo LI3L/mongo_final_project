@@ -20,14 +20,26 @@ module.exports = {
   getLeaderBord: async () => {
     return await UsersCollection.getLeaderBord();
   },
-  updateLevel: async (userId, level,data,type) => {
-    const u = await UsersCollection.updateLevel(userId, level,data,type);
+  updateLevel: async (userId, level, data, type) => {
+    const u = await UsersCollection.updateLevel(userId, level, data, type);
     return u;
   },
 
   getUser: async (strId) => {
     const user = await UsersCollection.findById(strId);
-    const { _id, name, mail, age, password, points, words, sentences,admin,success,failure } = user;
+    const {
+      _id,
+      name,
+      mail,
+      age,
+      password,
+      points,
+      words,
+      sentences,
+      admin,
+      success,
+      failure,
+    } = user;
     return {
       _id,
       name,
@@ -39,7 +51,7 @@ module.exports = {
       sentences,
       admin,
       success,
-      failure
+      failure,
     };
   },
   createUser: async (p) => {
@@ -66,7 +78,17 @@ module.exports = {
   },
   findByName: async (name) => {
     const user = await UsersCollection.findByName(name);
-    const { mail, age, password, points, words, sentences,admin,success,failure } = user;
+    const {
+      mail,
+      age,
+      password,
+      points,
+      words,
+      sentences,
+      admin,
+      success,
+      failure,
+    } = user;
     return {
       name,
       mail,
@@ -77,7 +99,7 @@ module.exports = {
       sentences,
       admin,
       success,
-      failure
+      failure,
     };
   },
   addPoints: async (userId, points) => {

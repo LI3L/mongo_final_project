@@ -12,7 +12,7 @@ class UsersCollection {
     }
     return this._instance;
   }
-  static async updateLevel(userId, level,data,type) {
+  static async updateLevel(userId, level, data, type) {
     try {
       return await this.instance().usersCollection.updateOne(
         { _id: new ObjectId(userId) },
@@ -25,13 +25,13 @@ class UsersCollection {
     } catch (error) {
       console.error("Error in updateLevel:", error);
       throw error;
+    }
   }
-}
-static async getLeaderBord() {
+  static async getLeaderBord() {
     try {
       return await this.instance()
         .usersCollection.find({})
-        .sort({points:-1})
+        .sort({ points: -1 })
         .limit(10)
         .toArray();
     } catch (error) {
@@ -61,13 +61,13 @@ static async getLeaderBord() {
   }
 
   static async findById(idStr) {
-    console.log("idStr:", idStr)
+    console.log("idStr:", idStr);
     try {
       return await this.instance().usersCollection.findOne({
         _id: new ObjectId(idStr),
       });
     } catch (error) {
-      console.error("Error in findById:"+error);
+      console.error("Error in findById:" + error);
       throw error;
     }
   }
